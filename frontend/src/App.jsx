@@ -1,3 +1,4 @@
+const API = import.meta.env.VITE_API_URL || API +" "
 import { useState, useEffect } from "react"
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
   const [guide, setGuide] = useState(null)
 
   const findMatches = (skillText) => {
-    fetch("http://localhost:8000/match?skills=" + encodeURIComponent(skillText))
+    fetch(API +" /match?skills=" + encodeURIComponent(skillText))
       .then((res) => res.json())
       .then((data) => setResults(data))
       .catch(() => alert("Backend connect nathi thayu"))
@@ -23,7 +24,7 @@ function App() {
   }, [])
 
   const openGuide = (name) => {
-    fetch("http://localhost:8000/skill-guide?name=" + encodeURIComponent(name))
+    fetch(API +" /skill-guide?name=" + encodeURIComponent(name))
       .then((res) => res.json())
       .then((data) => setGuide({ name, ...data }))
   }
