@@ -1,5 +1,6 @@
-const API = import.meta.env.VITE_API_URL || API +" "
 import { useState, useEffect } from "react"
+
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000"
 
 function App() {
   const [skills, setSkills] = useState(() => localStorage.getItem("skills") || "")
@@ -8,7 +9,7 @@ function App() {
   const [guide, setGuide] = useState(null)
 
   const findMatches = (skillText) => {
-    fetch(API +" /match?skills=" + encodeURIComponent(skillText))
+    fetch(API + "/match?skills=" + encodeURIComponent(skillText))
       .then((res) => res.json())
       .then((data) => setResults(data))
       .catch(() => alert("Backend connect nathi thayu"))
@@ -24,7 +25,7 @@ function App() {
   }, [])
 
   const openGuide = (name) => {
-    fetch(API +" /skill-guide?name=" + encodeURIComponent(name))
+    fetch(API + "/skill-guide?name=" + encodeURIComponent(name))
       .then((res) => res.json())
       .then((data) => setGuide({ name, ...data }))
   }
